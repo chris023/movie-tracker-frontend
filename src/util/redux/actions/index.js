@@ -8,6 +8,16 @@ export const setMovies = movies => ({
   movies,
 })
 
+export const getFavorites = user_id => ({
+  type: 'FAVORITES/GET',
+  user_id,
+})
+
+export const setFavorites = favorites => ({
+  type: 'FAVORITES/SET',
+  favorites,
+})
+
 export const loginSuccess = user => ({
   type: 'LOGIN/SUCCESS',
   user,

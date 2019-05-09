@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Root from './paths'
 import Auth from './paths/Auth'
@@ -9,11 +9,8 @@ import Auth from './paths/Auth'
 function App({ authenticated }) {
   return (
     <>
+      {!authenticated && <Auth />}
       <Route path="/" component={Root} />
-      <Switch>
-        <Route exact path="/login" component={Auth} />
-        <Redirect to="/login" />
-      </Switch>
     </>
   )
 }

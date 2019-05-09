@@ -1,9 +1,11 @@
 import {
   fetchFailed,
+  getFavorites,
   loginFailed,
   loginSuccess,
   registerFailed,
   registerSuccess,
+  setFavorites,
   setMovies,
 } from '../actions'
 import tmdbApiKey from '../../apiKeys/TheMovieDB'
@@ -26,6 +28,22 @@ function* fetchMovies() {
   }
 }
 
+function* fetchFavorites(user_id) {
+  try {
+    // eslint-disable-next-line no-console
+    console.log(`${db_path}/users/${user_id}/favorites`)
+    const favorites = yield call(async () => {
+      const response = await fetch(`${db_path}/users/${user_id}/favorites`)
+      return response.json()
+    })
+    yield put(setFavorites(favorites))
+  } catch (e) {
+    alert(e)
+    // yield put(favoritesFetchFailed())
+    return
+  }
+}
+
 function* attemptLogin(user) {
   try {
     const response = yield call(async () => {
@@ -36,10 +54,10 @@ function* attemptLogin(user) {
           'Content-Type': 'application/json',
         },
       })
-      const data = response.json()
-      return data
+      return response.json()
     })
     yield put(loginSuccess(response))
+    yield put(getFavorites(response.data.id))
   } catch (e) {
     yield put(loginFailed())
     return
@@ -56,8 +74,7 @@ function* attemptRegister(user) {
           'Content-Type': 'application/json',
         },
       })
-      const data = response.json()
-      return data
+      return response.json()
     })
     yield put(registerSuccess(response))
   } catch (e) {
@@ -109,4 +126,5 @@ export default function* mySaga() {
   yield takeLatest('REGISTER/ATTEMPT', action => attemptRegister(action.user))
   yield takeLatest('FAVORITE/ADD', action => addFavorite(action.data))
   yield takeLatest('FAVORITE/REMOVE', action => removeFavorite(action.data))
+  yield takeLatest('FAVORITES/GET', action => fetchFavorites(action.user_id))
 }

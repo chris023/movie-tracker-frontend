@@ -8,6 +8,7 @@ import {
   TextField,
   withStyles,
 } from '@material-ui/core'
+import { Redirect } from 'react-router-dom'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
 import { attemptLogin, attemptRegister } from '../../../util/redux/actions'
@@ -43,8 +44,7 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes, sendLogin, sendRegister }) => {
-  const [open, setOpen] = useState(true)
+const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('tman2272@aol.com')
   const [password, setPassword] = useState('password')
@@ -133,39 +133,42 @@ const View = ({ classes, sendLogin, sendRegister }) => {
   )
 
   return (
-    <Dialog open={open} onClose={() => setOpen(false)} className={classes.root}>
-      <form>
-        <DialogActions className={classes.actions}>
-          <Button
-            className={`${classes.button} ${classes.buttonLeft}`}
-            variant="outlined"
-            onClick={changePanel}
-          >
-            Login
-          </Button>
-          <Button
-            className={`${classes.button} ${classes.buttonRight}`}
-            variant="outlined"
-            onClick={changePanel}
-          >
-            Register
-          </Button>
-        </DialogActions>
-        <DialogContent className={classes.content}>
-          {panel === 'login' ? loginOptions : registerOptions}
-          <DialogActions>
+    <>
+      {authenticated && <Redirect to="/" />}
+      <Dialog open={true} className={classes.root}>
+        <form>
+          <DialogActions className={classes.actions}>
             <Button
-              variant="contained"
-              type="submit"
-              className={classes.submitButton}
-              onClick={submitHandler}
+              className={`${classes.button} ${classes.buttonLeft}`}
+              variant="outlined"
+              onClick={changePanel}
             >
-              Submit
+              Login
+            </Button>
+            <Button
+              className={`${classes.button} ${classes.buttonRight}`}
+              variant="outlined"
+              onClick={changePanel}
+            >
+              Register
             </Button>
           </DialogActions>
-        </DialogContent>
-      </form>
-    </Dialog>
+          <DialogContent className={classes.content}>
+            {panel === 'login' ? loginOptions : registerOptions}
+            <DialogActions>
+              <Button
+                variant="contained"
+                type="submit"
+                className={classes.submitButton}
+                onClick={submitHandler}
+              >
+                Submit
+              </Button>
+            </DialogActions>
+          </DialogContent>
+        </form>
+      </Dialog>
+    </>
   )
 }
 
@@ -173,7 +176,12 @@ View.propTypes = {
   classes: PropTypes.object,
   sendLogin: PropTypes.func,
   sendRegister: PropTypes.func,
+  authenticated: PropTypes.bool,
 }
+
+const mapStateToProps = state => ({
+  authenticated: state.login.success,
+})
 
 const mapDispatchToProps = dispatch => ({
   sendLogin: user => dispatch(attemptLogin(user)),
@@ -183,7 +191,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   withStyles(styles),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(View)

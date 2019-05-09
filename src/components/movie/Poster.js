@@ -27,8 +27,18 @@ const styles = () => ({
   },
 })
 
-const Poster = ({ classes, movie, addFavorite, removeFavorite, user_id }) => {
-  const [isFavorite, setFavorite] = useState(false)
+const Poster = ({
+  classes,
+  movie,
+  addFavorite,
+  removeFavorite,
+  user_id,
+  favorites,
+}) => {
+  const isStoredFavorite = () =>
+    favorites.includes(favorite => movie.id === favorite.movie_id)
+
+  const [isFavorite, setFavorite] = useState(isStoredFavorite())
   const toggleFavorite = () => {
     switch (isFavorite) {
       case true:
@@ -77,10 +87,12 @@ Poster.propTypes = {
   addFavorite: PropTypes.func,
   removeFavorite: PropTypes.func,
   user_id: PropTypes.number,
+  favorites: PropTypes.array,
 }
 
 const mapStateToProps = state => ({
-  user_id: state.login.data.id,
+  favorites: state.favorites.data ? state.favorites.data : [],
+  user_id: state.login.data ? state.login.data.id : null,
 })
 
 const mapDispatchToProps = dispatch => ({

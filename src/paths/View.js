@@ -26,7 +26,7 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes, fetchMovies, movies }) => {
+const View = ({ classes, fetchMovies, movies, logout }) => {
   const [anchor, setAnchor] = useState(null)
   const [open, setOpen] = useState(false)
   const openMenu = ({ target }) => {
@@ -36,6 +36,11 @@ const View = ({ classes, fetchMovies, movies }) => {
   const closeMenu = () => {
     setOpen(false)
     setAnchor(null)
+  }
+
+  const handleLogout = () => {
+    closeMenu()
+    logout()
   }
 
   useEffect(() => {
@@ -61,7 +66,7 @@ const View = ({ classes, fetchMovies, movies }) => {
                 },
               }}
             >
-              <MenuItem>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </div>
         </Toolbar>
@@ -86,6 +91,7 @@ View.propTypes = {
   classes: PropTypes.object,
   fetchMovies: PropTypes.func,
   movies: PropTypes.object,
+  logout: PropTypes.func,
 }
 
 const mapStateToProps = ({ movies }) => ({
@@ -94,6 +100,7 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchMovies: () => dispatch({ type: 'MOVIES/FETCH' }),
+  logout: () => dispatch({ type: 'AUTH/LOGOUT' }),
 })
 
 export default compose(
