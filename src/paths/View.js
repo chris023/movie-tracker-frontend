@@ -68,7 +68,7 @@ const View = ({ classes, fetchMovies, movies }) => {
       </AppBar>
       <Paper square className={classes.root}>
         <div className={classes.appBarSpacer} />
-        <Grid container spacing={16}>
+        <Grid container spacing={32}>
           {movies.results.map(movie => (
             <Grid item xs={3} key={movie.id}>
               <Poster movie={movie} />
