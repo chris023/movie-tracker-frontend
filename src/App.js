@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import Root from './paths'
 import Auth from './paths/Auth'
 
+// eslint-disable-next-line no-unused-vars
 function App({ authenticated }) {
-  alert(authenticated)
   return (
     <>
       <Route path="/" component={Root} />

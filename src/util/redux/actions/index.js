@@ -12,3 +12,12 @@ export const loginSuccess = user => ({
   type: 'LOGIN/SUCCESS',
   user,
 })
+
+export const loginFailed = () => ({
+  type: 'LOGIN/FAILED',
+})
+
+export const attemptLogin = user => ({
+  type: 'LOGIN/ATTEMPT',
+  user,
+})

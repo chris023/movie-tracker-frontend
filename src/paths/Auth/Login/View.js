@@ -8,6 +8,9 @@ import {
   TextField,
   withStyles,
 } from '@material-ui/core'
+import { compose } from 'recompose'
+import { connect } from 'react-redux'
+import { attemptLogin } from '../../../util/redux/actions'
 
 const styles = theme => ({
   root: {},
@@ -40,10 +43,15 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes }) => {
+const View = ({ classes, sendLogin }) => {
   const [open, setOpen] = useState(true)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('tman2272@aol.com')
+  const [password, setPassword] = useState('password')
+
+  const loginHandler = e => {
+    e.preventDefault()
+    sendLogin({ email, password })
+  }
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} className={classes.root}>
@@ -84,6 +92,7 @@ const View = ({ classes }) => {
               variant="contained"
               type="submit"
               className={classes.submitButton}
+              onClick={loginHandler}
             >
               Submit
             </Button>
@@ -96,6 +105,17 @@ const View = ({ classes }) => {
 
 View.propTypes = {
   classes: PropTypes.object,
+  sendLogin: PropTypes.func,
 }
 
-export default withStyles(styles)(View)
+const mapDispatchToProps = dispatch => ({
+  sendLogin: user => dispatch(attemptLogin(user)),
+})
+
+export default compose(
+  withStyles(styles),
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(View)
