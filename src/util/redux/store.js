@@ -7,7 +7,7 @@ import rootReducer from './reducers'
 import mySaga from './sagas'
 
 const persistConfig = {
-  key: 'root',
+  key: 'movie-tracker',
   storage,
 }
 
