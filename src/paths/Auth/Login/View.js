@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import { attemptLogin } from '../../../util/redux/actions'
+import { attemptLogin, attemptRegister } from '../../../util/redux/actions'
 
 const styles = theme => ({
   root: {},
@@ -43,16 +43,94 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes, sendLogin }) => {
+const View = ({ classes, sendLogin, sendRegister }) => {
   const [open, setOpen] = useState(true)
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('tman2272@aol.com')
   const [password, setPassword] = useState('password')
+  const [password2, setPassword2] = useState('')
   const [panel, setPanel] = useState('login')
 
-  const loginHandler = e => {
-    e.preventDefault()
-    sendLogin({ email, password })
+  const changePanel = e => {
+    setPanel(e.target.innerText.toLowerCase())
+    setName('')
+    setEmail('')
+    setPassword('')
+    setPassword2('')
   }
+
+  const submitHandler = e => {
+    e.preventDefault()
+    switch (panel) {
+      case 'login':
+        return sendLogin({ email, password })
+      case 'register':
+        return sendRegister({ name, email, password })
+      default:
+        return
+    }
+  }
+
+  const loginOptions = (
+    <>
+      <TextField
+        label="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+      <TextField
+        label="Password"
+        value={password}
+        type="password"
+        onChange={e => setPassword(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+    </>
+  )
+
+  const registerOptions = (
+    <>
+      <TextField
+        label="Name"
+        value={name}
+        onChange={e => setName(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+      <TextField
+        label="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+      <TextField
+        label="Password"
+        value={password}
+        type="password"
+        onChange={e => setPassword(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+      <TextField
+        label="Repeat Password"
+        value={password2}
+        type="password"
+        onChange={e => setPassword2(e.target.value)}
+        margin="normal"
+        variant="outlined"
+        className={classes.textField}
+      />
+    </>
+  )
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} className={classes.root}>
@@ -61,40 +139,26 @@ const View = ({ classes, sendLogin }) => {
           <Button
             className={`${classes.button} ${classes.buttonLeft}`}
             variant="outlined"
+            onClick={changePanel}
           >
             Login
           </Button>
           <Button
             className={`${classes.button} ${classes.buttonRight}`}
             variant="outlined"
+            onClick={changePanel}
           >
             Register
           </Button>
         </DialogActions>
         <DialogContent className={classes.content}>
-          <TextField
-            label="Email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            className={classes.textField}
-          />
-          <TextField
-            label="Password"
-            value={password}
-            type="password"
-            onChange={e => setPassword(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            className={classes.textField}
-          />
+          {panel === 'login' ? loginOptions : registerOptions}
           <DialogActions>
             <Button
               variant="contained"
               type="submit"
               className={classes.submitButton}
-              onClick={loginHandler}
+              onClick={submitHandler}
             >
               Submit
             </Button>
@@ -108,10 +172,12 @@ const View = ({ classes, sendLogin }) => {
 View.propTypes = {
   classes: PropTypes.object,
   sendLogin: PropTypes.func,
+  sendRegister: PropTypes.func,
 }
 
 const mapDispatchToProps = dispatch => ({
   sendLogin: user => dispatch(attemptLogin(user)),
+  sendRegister: user => dispatch(attemptRegister(user)),
 })
 
 export default compose(

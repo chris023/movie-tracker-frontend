@@ -21,3 +21,17 @@ export const attemptLogin = user => ({
   type: 'LOGIN/ATTEMPT',
   user,
 })
+
+export const attemptRegister = user => ({
+  type: 'REGISTER/ATTEMPT',
+  user,
+})
+
+export const registerSuccess = user => ({
+  type: 'REGISTER/SUCCESS',
+  user,
+})
+
+export const registerFailed = () => ({
+  type: 'REGISTER/FAILED',
+})

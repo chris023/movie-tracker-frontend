@@ -1,4 +1,11 @@
-import { fetchFailed, loginFailed, loginSuccess, setMovies } from '../actions'
+import {
+  fetchFailed,
+  loginFailed,
+  loginSuccess,
+  registerFailed,
+  registerSuccess,
+  setMovies,
+} from '../actions'
 import tmdbApiKey from '../../apiKeys/TheMovieDB'
 import db_path from '../../../config'
 
@@ -39,7 +46,28 @@ function* attemptLogin(user) {
   }
 }
 
+function* attemptRegister(user) {
+  try {
+    const response = yield call(async () => {
+      const response = await fetch(db_path + '/users/new', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data = response.json()
+      return data
+    })
+    yield put(registerSuccess(response))
+  } catch (e) {
+    yield put(registerFailed())
+    return
+  }
+}
+
 export default function* mySaga() {
   yield takeLatest('MOVIES/FETCH', fetchMovies)
   yield takeLatest('LOGIN/ATTEMPT', action => attemptLogin(action.user))
+  yield takeLatest('REGISTER/ATTEMPT', action => attemptRegister(action.user))
 }
