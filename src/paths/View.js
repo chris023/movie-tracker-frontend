@@ -1,19 +1,32 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { Grid, withStyles } from '@material-ui/core'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
+import { Poster } from '../components/movie'
 
-const styles = () => ({})
+const styles = theme => ({
+  root: {
+    padding: theme.spacing.unit * 4,
+  },
+})
 
-// eslint-disable-next-line no-unused-vars
 const View = ({ classes, fetchMovies, movies }) => {
   useEffect(() => {
     fetchMovies()
   }, [fetchMovies])
-  // eslint-disable-next-line no-console
-  console.log(movies)
-  return <p>Root</p>
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={16}>
+        {movies.results.map(movie => (
+          <Grid item xs={3} key={movie.id}>
+            <Poster />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  )
 }
 
 View.propTypes = {
