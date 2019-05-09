@@ -1,18 +1,29 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Root from './paths'
 import Auth from './paths/Auth'
 
-function App() {
+function App({ authenticated }) {
+  alert(authenticated)
   return (
     <>
+      <Route path="/" component={Root} />
       <Switch>
-        <Route path="/login" component={Auth} />
+        <Route exact path="/login" component={Auth} />
         <Redirect to="/login" />
       </Switch>
-      <Root />
     </>
   )
 }
 
-export default App
+App.propTypes = {
+  authenticated: PropTypes.bool,
+}
+
+const mapStateToProps = state => ({
+  authenticated: state.login.success,
+})
+
+export default connect(mapStateToProps)(App)
