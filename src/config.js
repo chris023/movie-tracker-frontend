@@ -1,1 +1,1 @@
-export const backend_url = 'localhost:3000/api/'
+export default 'localhost:3001/api'
