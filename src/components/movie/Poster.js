@@ -35,16 +35,19 @@ const Poster = ({ classes, movie, addFavorite, removeFavorite, user_id }) => {
         removeFavorite({
           movie_id: movie.id,
           user_id,
+        })
+        setFavorite(prev => !prev)
+        break
+      case false:
+        addFavorite({
+          movie_id: movie.id,
+          user_id,
           title: movie.title,
           poster_path: movie.poster_path,
           release_date: movie.release_date,
           vote_average: movie.vote_average,
           overview: movie.overview,
         })
-        setFavorite(prev => !prev)
-        break
-      case false:
-        addFavorite({})
         setFavorite(prev => !prev)
         break
       default:
