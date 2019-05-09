@@ -47,6 +47,7 @@ const View = ({ classes, sendLogin }) => {
   const [open, setOpen] = useState(true)
   const [email, setEmail] = useState('tman2272@aol.com')
   const [password, setPassword] = useState('password')
+  const [panel, setPanel] = useState('login')
 
   const loginHandler = e => {
     e.preventDefault()
@@ -82,6 +83,7 @@ const View = ({ classes, sendLogin }) => {
           <TextField
             label="Password"
             value={password}
+            type="password"
             onChange={e => setPassword(e.target.value)}
             margin="normal"
             variant="outlined"
