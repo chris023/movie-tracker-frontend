@@ -69,11 +69,13 @@ const View = ({ classes, fetchMovies, movies }) => {
       <Paper square className={classes.root}>
         <div className={classes.appBarSpacer} />
         <Grid container spacing={32}>
-          {movies.results.map(movie => (
-            <Grid item xs={3} key={movie.id}>
-              <Poster movie={movie} />
-            </Grid>
-          ))}
+          {movies &&
+            movies.results &&
+            movies.results.map(movie => (
+              <Grid item xs={3} key={movie.id}>
+                <Poster movie={movie} />
+              </Grid>
+            ))}
         </Grid>
       </Paper>
     </>
@@ -86,8 +88,8 @@ View.propTypes = {
   movies: PropTypes.object,
 }
 
-const mapStateToProps = ({ moviesReducer }) => ({
-  movies: moviesReducer,
+const mapStateToProps = ({ movies }) => ({
+  movies,
 })
 
 const mapDispatchToProps = dispatch => ({
