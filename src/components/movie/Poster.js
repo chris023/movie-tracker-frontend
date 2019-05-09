@@ -28,9 +28,7 @@ const Poster = ({ classes, movie }) => {
         className={classes.poster}
         src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
       />
-      <div className={classes.content}>
-        <p>hi</p>
-      </div>
+      <div className={classes.content} />
     </Card>
   )
 }
