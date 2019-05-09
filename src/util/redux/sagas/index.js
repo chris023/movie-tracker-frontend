@@ -66,8 +66,47 @@ function* attemptRegister(user) {
   }
 }
 
+function* addFavorite(data) {
+  try {
+    yield call(async () => {
+      await fetch(db_path + '/users/favorites/new', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    })
+  } catch (e) {
+    alert(e)
+    return
+  }
+}
+
+function* removeFavorite(data) {
+  try {
+    yield call(async () => {
+      await fetch(
+        `${db_path}/users/${data.user_id}/favorites/${data.movie_id}`,
+        {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+    })
+  } catch (e) {
+    alert(e)
+    return
+  }
+}
+
 export default function* mySaga() {
   yield takeLatest('MOVIES/FETCH', fetchMovies)
   yield takeLatest('LOGIN/ATTEMPT', action => attemptLogin(action.user))
   yield takeLatest('REGISTER/ATTEMPT', action => attemptRegister(action.user))
+  yield takeLatest('FAVORITE/ADD', action => addFavorite(action.data))
+  yield takeLatest('FAVORITE/REMOVE', action => removeFavorite(action.data))
 }

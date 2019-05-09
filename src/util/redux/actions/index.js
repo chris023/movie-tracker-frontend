@@ -35,3 +35,13 @@ export const registerSuccess = user => ({
 export const registerFailed = () => ({
   type: 'REGISTER/FAILED',
 })
+
+export const addFav = data => ({
+  type: 'FAVORITE/ADD',
+  data,
+})
+
+export const removeFav = data => ({
+  type: 'FAVORITE/REMOVE',
+  data,
+})
