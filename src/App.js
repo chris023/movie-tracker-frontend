@@ -6,11 +6,11 @@ import Auth from './paths/Auth'
 function App() {
   return (
     <>
-      <Auth />
       <Switch>
-        <Route exact path="/" component={Root} />
-        <Redirect to="/" />
+        <Route path="/login" component={Auth} />
+        <Redirect to="/login" />
       </Switch>
+      <Root />
     </>
   )
 }
