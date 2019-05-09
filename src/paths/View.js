@@ -21,7 +21,7 @@ const View = ({ classes, fetchMovies, movies }) => {
       <Grid container spacing={16}>
         {movies.results.map(movie => (
           <Grid item xs={3} key={movie.id}>
-            <Poster />
+            <Poster movie={movie} />
           </Grid>
         ))}
       </Grid>
