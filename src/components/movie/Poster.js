@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Card, withStyles } from '@material-ui/core'
+import { Card, IconButton, withStyles } from '@material-ui/core'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import FavoriteIcon from '@material-ui/icons/Favorite'
 
 const styles = () => ({
   root: {
@@ -22,13 +24,20 @@ const styles = () => ({
 })
 
 const Poster = ({ classes, movie }) => {
+  const [isFavorite, setFavorite] = useState(false)
+  const toggleFavorite = () => setFavorite(prev => !prev)
+
   return (
     <Card className={classes.root}>
       <img
         className={classes.poster}
         src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
       />
-      <div className={classes.content} />
+      <div className={classes.content}>
+        <IconButton onClick={toggleFavorite}>
+          {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </IconButton>
+      </div>
     </Card>
   )
 }
