@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   TextField,
   withStyles,
 } from '@material-ui/core'
@@ -13,11 +12,24 @@ import {
 const styles = theme => ({
   root: {},
   actions: {
-    padding: theme.spacing.unit,
+    padding: 0,
+    margin: 0,
+  },
+  button: {
+    borderRadius: 0,
+    height: 44,
+    margin: 0,
+    width: '50%',
   },
   content: {
     display: 'flex',
     flexDirection: 'column',
+    paddingTop: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+  },
+  submitButton: {
+    margin: `${theme.spacing.unit}px 0`,
+    width: '100%',
   },
   textField: {
     width: 250,
@@ -35,29 +47,49 @@ const View = ({ classes }) => {
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} className={classes.root}>
-      <DialogTitle className={classes.title}>Login</DialogTitle>
-      <DialogContent className={classes.content}>
-        <TextField
-          label="Email"
-          value={email}
-          onChange={setEmail}
-          margin="normal"
-          variant="outlined"
-          className={classes.textField}
-        />
-        <TextField
-          label="Password"
-          value={password}
-          onChange={setPassword}
-          margin="normal"
-          variant="outlined"
-          className={classes.textField}
-        />
-      </DialogContent>
-      <DialogActions className={classes.actions}>
-        <Button>Register</Button>
-        <Button>Login</Button>
-      </DialogActions>
+      <form>
+        <DialogActions className={classes.actions}>
+          <Button
+            className={`${classes.button} ${classes.buttonLeft}`}
+            variant="outlined"
+          >
+            Login
+          </Button>
+          <Button
+            className={`${classes.button} ${classes.buttonRight}`}
+            variant="outlined"
+          >
+            Register
+          </Button>
+        </DialogActions>
+        <DialogContent className={classes.content}>
+          <TextField
+            label="Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            margin="normal"
+            variant="outlined"
+            className={classes.textField}
+          />
+          <TextField
+            label="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            margin="normal"
+            variant="outlined"
+            className={classes.textField}
+          />
+          <DialogActions>
+            <Button
+              variant="contained"
+              type="submit"
+              className={classes.submitButton}
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </DialogContent>
+      </form>
     </Dialog>
   )
 }
