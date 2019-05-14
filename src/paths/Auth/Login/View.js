@@ -75,11 +75,13 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
     <>
       <TextField
         label="Email"
+        type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
       <TextField
         label="Password"
@@ -89,6 +91,7 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
     </>
   )
@@ -102,14 +105,17 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
       <TextField
         label="Email"
+        type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
       <TextField
         label="Password"
@@ -119,6 +125,7 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
       <TextField
         label="Repeat Password"
@@ -128,6 +135,7 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
         margin="normal"
         variant="outlined"
         className={classes.textField}
+        required
       />
     </>
   )
