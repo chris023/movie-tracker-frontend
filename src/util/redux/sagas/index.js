@@ -103,8 +103,8 @@ function* removeFavorite(data) {
     yield call(async () => {
       await fetch(
         `${db_path}/users/${data.user_id}/favorites/${data.movie_id}`,
-        { method: 'DELETE' }
-      )
+        { method: 'delete' }
+      ).then(response => response.json())
     })
   } catch (e) {
     alert(e)
