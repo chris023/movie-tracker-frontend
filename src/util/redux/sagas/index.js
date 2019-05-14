@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   fetchFailed,
   getFavorites,
@@ -30,11 +31,11 @@ function* fetchMovies() {
 
 function* fetchFavorites(user_id) {
   try {
-    const favorites = yield call(async () => {
-      const response = await fetch(`${db_path}/users/${user_id}/favorites`)
-      return response.json()
-    })
-    yield put(setFavorites(favorites))
+    // const favorites = yield call(async () => {
+    //   const response = await fetch(`${db_path}/users/${user_id}/favorites`)
+    //   return response.json()
+    // })
+    yield put(setFavorites({ data: { results: [] } }))
   } catch (e) {
     alert(e)
     // yield put(favoritesFetchFailed())
@@ -42,20 +43,20 @@ function* fetchFavorites(user_id) {
   }
 }
 
-function* attemptLogin(user) {
+function* attemptLogin() {
   try {
-    const response = yield call(async () => {
-      const response = await fetch(db_path + '/users', {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      return response.json()
-    })
-    yield put(loginSuccess(response))
-    yield put(getFavorites(response.data.id))
+    // const response = yield call(async () => {
+    //   const response = await fetch(db_path + '/users', {
+    //     method: 'POST',
+    //     body: JSON.stringify(user),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   return response.json()
+    // })
+    yield put(loginSuccess({ data: { id: 1 } }))
+    // yield put(getFavorites(response.data.id))
   } catch (e) {
     yield put(loginFailed())
     return
@@ -64,17 +65,17 @@ function* attemptLogin(user) {
 
 function* attemptRegister(user) {
   try {
-    const response = yield call(async () => {
-      const response = await fetch(db_path + '/users/new', {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      return response.json()
-    })
-    yield put(registerSuccess(response))
+    // const response = yield call(async () => {
+    //   const response = await fetch(db_path + '/users/new', {
+    //     method: 'POST',
+    //     body: JSON.stringify(user),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    //   return response.json()
+    // })
+    yield put(registerSuccess({ id: 1 }))
   } catch (e) {
     yield put(registerFailed())
     return
@@ -83,15 +84,16 @@ function* attemptRegister(user) {
 
 function* addFavorite(data) {
   try {
-    yield call(async () => {
-      await fetch(db_path + '/users/favorites/new', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-    })
+    // yield call(async () => {
+    //   await fetch(db_path + '/users/favorites/new', {
+    //     method: 'POST',
+    //     body: JSON.stringify(data),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    // })
+    yield
   } catch (e) {
     alert(e)
     return
@@ -100,12 +102,13 @@ function* addFavorite(data) {
 
 function* removeFavorite(data) {
   try {
-    yield call(async () => {
-      await fetch(
-        `${db_path}/users/${data.user_id}/favorites/${data.movie_id}`,
-        { method: 'delete' }
-      ).then(response => response.json())
-    })
+    // yield call(async () => {
+    //   await fetch(
+    //     `${db_path}/users/${data.user_id}/favorites/${data.movie_id}`,
+    //     { method: 'delete' }
+    //   ).then(response => response.json())
+    // })
+    yield
   } catch (e) {
     alert(e)
     return
