@@ -19,6 +19,11 @@ const styles = theme => ({
     padding: 0,
     margin: 0,
   },
+  activePanel: {
+    borderBottom: 'none',
+    borderTopRightRadius: `${theme.shape.borderRadius}px !important`,
+    borderTopLeftRadius: `${theme.shape.borderRadius}px !important`,
+  },
   button: {
     borderRadius: 0,
     height: 44,
@@ -26,10 +31,16 @@ const styles = theme => ({
     width: '50%',
   },
   content: {
+    border: 'solid 1px #6d6d6d',
+    borderTop: 'none',
     display: 'flex',
     flexDirection: 'column',
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
+  },
+  inActivePanel: {
+    border: 'none',
+    borderBottom: 'solid 1px #6d6d6d',
   },
   submitButton: {
     margin: `${theme.spacing.unit}px 0`,
@@ -147,14 +158,30 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
         <form>
           <DialogActions className={classes.actions}>
             <Button
-              className={`${classes.button} ${classes.buttonLeft}`}
+              className={
+                panel === 'login'
+                  ? `${classes.button} ${classes.buttonLeft} ${
+                      classes.activePanel
+                    }`
+                  : `${classes.button} ${classes.buttonLeft} ${
+                      classes.inActivePanel
+                    }`
+              }
               variant="outlined"
               onClick={changePanel}
             >
               Login
             </Button>
             <Button
-              className={`${classes.button} ${classes.buttonRight}`}
+              className={
+                panel === 'register'
+                  ? `${classes.button} ${classes.buttonRight} ${
+                      classes.activePanel
+                    }`
+                  : `${classes.button} ${classes.buttonRight} ${
+                      classes.inActivePanel
+                    }`
+              }
               variant="outlined"
               onClick={changePanel}
             >
@@ -166,6 +193,7 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
             <DialogActions>
               <Button
                 variant="contained"
+                color="secondary"
                 type="submit"
                 className={classes.submitButton}
                 onClick={submitHandler}
