@@ -4,6 +4,13 @@ const Theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  overrides: {
+    MuiDialog: {
+      container: {
+        alignItems: 'flex-end',
+      },
+    },
+  },
   palette: {
     type: 'dark',
     primary: {
