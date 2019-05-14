@@ -151,7 +151,7 @@ const Poster = ({
         <DialogContent
           className={classes.dialogContent}
           style={{
-            backgroundImage: `url(${'http://image.tmdb.org/t/p/w500' +
+            backgroundImage: `url(${'http://image.tmdb.org/t/p/w1280' +
               movie.backdrop_path})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
@@ -161,7 +161,7 @@ const Poster = ({
         <Paper className={classes.dialogPosterContainer}>
           <img
             className={classes.poster}
-            src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
+            src={'http://image.tmdb.org/t/p/w500' + movie.poster_path}
             alt={movie.title}
           />
         </Paper>
