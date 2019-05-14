@@ -43,6 +43,8 @@ const styles = theme => ({
     borderBottom: 'solid 1px #6d6d6d',
   },
   submitButton: {
+    letterSpacing: 1,
+    fontWeight: 700,
     margin: `${theme.spacing.unit}px 0`,
     width: '100%',
   },
@@ -198,7 +200,8 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
                 className={classes.submitButton}
                 onClick={submitHandler}
               >
-                {panel.split('')[0].toUpperCase() + panel.slice(1)}
+                {/* {panel.split('')[0].toUpperCase() + panel.slice(1)} */}
+                {panel.toUpperCase()}
               </Button>
             </DialogActions>
           </DialogContent>
