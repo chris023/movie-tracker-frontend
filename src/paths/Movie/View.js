@@ -25,7 +25,7 @@ const styles = theme => ({
   },
   backIcon: {
     border: 'solid 3px #fff',
-    left: theme.spacing.unit * 4,
+    left: theme.spacing.unit * 6,
     position: 'fixed',
     top: theme.spacing.unit * 4 + 48,
     zIndex: 999999999,
