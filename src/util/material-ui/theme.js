@@ -28,6 +28,10 @@ const Theme = createMuiTheme({
     secondary: {
       main: '#42dbff',
     },
+    text: {
+      primary: '#fff',
+      secondary: '#c8c6c8',
+    },
   },
 })
 
