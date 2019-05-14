@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { addFav, removeFav } from '../../util/redux/actions'
 
 const styles = () => ({
@@ -14,16 +15,33 @@ const styles = () => ({
     position: 'relative',
     cursor: 'pointer',
   },
+  favoritedIcon: {
+    color: '#ddd',
+  },
+  iconButton: {
+    color: '#999',
+    ['&:hover']: {
+      color: '#fff !important',
+    },
+  },
   poster: {
     width: '100%',
     height: '100%',
     zIndex: '-10',
   },
-  content: {
-    width: '100%',
+  overlay: {
+    boxSizing: 'border-box',
     height: '100%',
+    filter: 'opacity(0)',
     position: 'absolute',
+    transition: '.2s',
     top: 0,
+    width: '100%',
+    ['&:hover']: {
+      background: '#0006',
+      border: 'solid 2px #cc7b19',
+      filter: 'opacity(1)',
+    },
   },
 })
 
@@ -70,18 +88,24 @@ const Poster = ({
   }
 
   return (
-    <Card className={classes.root}>
-      <img
-        className={classes.poster}
-        src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
-        alt={movie.title}
-      />
-      <div className={classes.content}>
-        <IconButton onClick={toggleFavorite}>
-          {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </IconButton>
-      </div>
-    </Card>
+    <Link to={'/movie/' + movie.id}>
+      <Card className={classes.root}>
+        <img
+          className={classes.poster}
+          src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
+          alt={movie.title}
+        />
+        <div className={classes.overlay}>
+          <IconButton onClick={toggleFavorite} className={classes.iconButton}>
+            {isFavorite ? (
+              <FavoriteIcon className={classes.favoritedIcon} />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
+          </IconButton>
+        </div>
+      </Card>
+    </Link>
   )
 }
 
