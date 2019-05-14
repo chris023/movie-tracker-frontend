@@ -58,7 +58,7 @@ const View = ({ classes, fetchMovies, movies, logout }) => {
       <AppBar>
         <Toolbar>
           <Link to="/">
-            <IconButton onClick={openMenu}>
+            <IconButton>
               <HomeIcon />
             </IconButton>
           </Link>
