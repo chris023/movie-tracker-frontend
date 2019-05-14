@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Root from './paths'
 import Auth from './paths/Auth'
+import MovieDetail from './paths/Movie'
 
-// eslint-disable-next-line no-unused-vars
 function App({ authenticated }) {
   return (
     <>
       {!authenticated && <Auth />}
-      <Route path="/" component={Root} />
+      <Switch>
+        <Route exact path="/" component={Root} />
+        <Route path="/movie/:movie_id" component={MovieDetail} />
+      </Switch>
     </>
   )
 }
