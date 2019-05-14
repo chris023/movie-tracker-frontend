@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import { compose } from 'recompose'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { addFav, removeFav } from '../../util/redux/actions'
 
 const styles = theme => ({
@@ -23,6 +23,7 @@ const styles = theme => ({
     ['&:hover']: {
       color: '#fff !important',
     },
+    zIndex: 10,
   },
   poster: {
     width: '100%',
@@ -46,9 +47,10 @@ const styles = theme => ({
 })
 
 const Poster = ({
-  classes,
-  movie,
   addFavorite,
+  classes,
+  history,
+  movie,
   removeFavorite,
   user_id,
   favorites,
@@ -87,25 +89,28 @@ const Poster = ({
     }
   }
 
+  const goToMovie = e => {
+    if (e.target.classList.contains('Connect-Poster--overlay-356'))
+      history.push('/movie/' + movie.id)
+  }
+
   return (
-    <Link to={'/movie/' + movie.id}>
-      <Card className={classes.root}>
-        <img
-          className={classes.poster}
-          src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
-          alt={movie.title}
-        />
-        <div className={classes.overlay}>
-          <IconButton onClick={toggleFavorite} className={classes.iconButton}>
-            {isFavorite ? (
-              <FavoriteIcon className={classes.favoritedIcon} />
-            ) : (
-              <FavoriteBorderIcon />
-            )}
-          </IconButton>
-        </div>
-      </Card>
-    </Link>
+    <Card className={classes.root} onClick={goToMovie}>
+      <img
+        className={classes.poster}
+        src={'http://image.tmdb.org/t/p/w400' + movie.poster_path}
+        alt={movie.title}
+      />
+      <div className={classes.overlay}>
+        <IconButton onClick={toggleFavorite} className={classes.iconButton}>
+          {isFavorite ? (
+            <FavoriteIcon className={classes.favoritedIcon} />
+          ) : (
+            <FavoriteBorderIcon />
+          )}
+        </IconButton>
+      </div>
+    </Card>
   )
 }
 
@@ -113,6 +118,7 @@ Poster.propTypes = {
   classes: PropTypes.object,
   movie: PropTypes.object,
   addFavorite: PropTypes.func,
+  history: PropTypes.object,
   removeFavorite: PropTypes.func,
   user_id: PropTypes.number,
   favorites: PropTypes.array,
@@ -129,6 +135,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default compose(
+  withRouter,
   withStyles(styles),
   connect(
     mapStateToProps,
