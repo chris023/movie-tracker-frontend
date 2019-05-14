@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Card, IconButton, withStyles } from '@material-ui/core'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
@@ -35,10 +35,14 @@ const Poster = ({
   user_id,
   favorites,
 }) => {
-  const isStoredFavorite = () =>
-    favorites.includes(favorite => movie.id === favorite.movie_id)
+  const [isFavorite, setFavorite] = useState(false)
 
-  const [isFavorite, setFavorite] = useState(isStoredFavorite())
+  useEffect(() => {
+    if (favorites.find(favorite => movie.id === favorite.movie_id))
+      return setFavorite(true)
+    return setFavorite(false)
+  }, [favorites, movie.id])
+
   const toggleFavorite = () => {
     switch (isFavorite) {
       case true:
@@ -91,8 +95,8 @@ Poster.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  favorites: state.favorites.data ? state.favorites.data : [],
-  user_id: state.login.data ? state.login.data.id : null,
+  favorites: state.favorites.data,
+  user_id: state.login.data.id,
 })
 
 const mapDispatchToProps = dispatch => ({
