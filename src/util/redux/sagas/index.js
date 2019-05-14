@@ -30,8 +30,6 @@ function* fetchMovies() {
 
 function* fetchFavorites(user_id) {
   try {
-    // eslint-disable-next-line no-console
-    console.log(`${db_path}/users/${user_id}/favorites`)
     const favorites = yield call(async () => {
       const response = await fetch(`${db_path}/users/${user_id}/favorites`)
       return response.json()
