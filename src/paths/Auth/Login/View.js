@@ -170,7 +170,7 @@ const View = ({ classes, sendLogin, sendRegister, authenticated }) => {
                 className={classes.submitButton}
                 onClick={submitHandler}
               >
-                Submit
+                {panel.split('')[0].toUpperCase() + panel.slice(1)}
               </Button>
             </DialogActions>
           </DialogContent>
