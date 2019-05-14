@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addFav, removeFav } from '../../util/redux/actions'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     height: '100%',
     width: '100%',
@@ -39,7 +39,7 @@ const styles = () => ({
     width: '100%',
     ['&:hover']: {
       background: '#0006',
-      border: 'solid 2px #cc7b19',
+      border: `solid 2px ${theme.palette.secondary.main}`,
       filter: 'opacity(1)',
     },
   },
