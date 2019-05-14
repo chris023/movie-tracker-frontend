@@ -5,11 +5,6 @@ const Theme = createMuiTheme({
     useNextVariants: true,
   },
   overrides: {
-    MuiDialog: {
-      container: {
-        alignItems: 'flex-end',
-      },
-    },
     MuiBackdrop: {
       root: {
         top: 64,

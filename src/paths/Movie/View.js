@@ -30,6 +30,9 @@ const styles = theme => ({
     top: theme.spacing.unit * 4 + 48,
     zIndex: 999999999,
   },
+  dialogContainer: {
+    alignItems: 'flex-end',
+  },
   dialogContent: {
     height: 350,
     padding: 0,
@@ -154,6 +157,9 @@ const Poster = ({
         maxWidth="xl"
         onClose={closeDialog}
         PaperProps={{ classes: { root: classes.dialogPaper } }}
+        classes={{
+          container: classes.dialogContainer,
+        }}
       >
         <DialogContent
           className={classes.dialogContent}
