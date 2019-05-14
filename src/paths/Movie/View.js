@@ -56,6 +56,13 @@ const styles = theme => ({
     right: theme.spacing.unit * 10,
     width: 300,
   },
+  dialogText: {
+    background: '#000a',
+    borderRadius: 4,
+    maxHeight: 450 - theme.spacing.unit * 28,
+    overflow: 'scroll',
+    padding: theme.spacing.unit * 4,
+  },
   dialogTextContentContainer: {
     boxSizing: 'border-box',
     display: 'grid',
@@ -166,7 +173,7 @@ const Poster = ({
           />
         </Paper>
         <div className={classes.dialogTextContentContainer}>
-          <div>
+          <div className={classes.dialogText}>
             <Typography variant="h4">{movie.title}</Typography>
             <div className={classes.movieSubheader}>
               <span className={classes.ratingContainer}>
