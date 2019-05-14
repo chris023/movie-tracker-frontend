@@ -37,7 +37,7 @@ const styles = theme => ({
   },
   dialogContentFilter: {
     background: '#000',
-    filter: 'opacity(.7)',
+    filter: 'opacity(.45)',
     height: '100%',
     left: 0,
     position: 'absolute',
@@ -49,6 +49,7 @@ const styles = theme => ({
   },
   dialogPosterContainer: {
     boxSizing: 'border-box',
+    boxShadow: `0px 5px 5px 0px rgb(255, 255, 255, .1)`,
     bottom: theme.spacing.unit * 10,
     height: 450,
     position: 'absolute',
@@ -64,10 +65,10 @@ const styles = theme => ({
     padding: `${theme.spacing.unit * 6}px ${theme.spacing.unit * 10}px`,
     position: 'absolute',
     top: 0,
-    // width: `calc(100% - ${theme.spacing.unit * 10}px - 300px`,
   },
   movieOverview: {
     paddingTop: theme.spacing.unit * 3,
+    textShadow: '#000 0px 0px 4px',
   },
   movieSubheader: {
     alignItems: 'flex-end',

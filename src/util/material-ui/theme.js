@@ -10,6 +10,12 @@ const Theme = createMuiTheme({
         alignItems: 'flex-end',
       },
     },
+    MuiBackdrop: {
+      root: {
+        top: 64,
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      },
+    },
   },
   palette: {
     type: 'dark',
