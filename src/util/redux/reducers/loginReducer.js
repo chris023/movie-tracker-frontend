@@ -1,4 +1,4 @@
-export default (state = { success: null }, action) => {
+export default (state = { success: null, data: {} }, action) => {
   switch (action.type) {
     case 'LOGIN/FAILED':
       return { success: false }

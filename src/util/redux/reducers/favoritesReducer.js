@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { data: [] }, action) => {
   switch (action.type) {
     case 'FAVORITES/SET':
       return action.favorites
