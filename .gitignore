@@ -25,3 +25,5 @@ yarn-error.log*
 /.vscode
 
 /src/util/apiKeys
+
+yarn.lock
