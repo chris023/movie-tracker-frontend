@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   AppBar,
+  Drawer,
   Grid,
   IconButton,
   Menu,
   MenuItem,
   Paper,
   Toolbar,
-  Typography,
   withStyles,
 } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
+import HomeIcon from '@material-ui/icons/Home'
 import { compose } from 'recompose'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Poster } from '../components/movie'
 
@@ -21,6 +23,10 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
   },
   appBarSpacer: theme.mixins.toolbar,
+  drawer: {
+    background: theme.palette.primary.kindaDark,
+    width: 240,
+  },
   pushRight: {
     marginLeft: 'auto',
   },
@@ -51,7 +57,11 @@ const View = ({ classes, fetchMovies, movies, logout }) => {
     <>
       <AppBar>
         <Toolbar>
-          <Typography variant="h4">Movie Tracker</Typography>
+          <Link to="/">
+            <IconButton onClick={openMenu}>
+              <HomeIcon />
+            </IconButton>
+          </Link>
           <div className={classes.pushRight}>
             <IconButton onClick={openMenu}>
               <PersonIcon />
@@ -71,18 +81,23 @@ const View = ({ classes, fetchMovies, movies, logout }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <Paper square className={classes.root}>
-        <div className={classes.appBarSpacer} />
-        <Grid container spacing={32}>
-          {movies &&
-            movies.results &&
-            movies.results.map(movie => (
-              <Grid item xs={2} key={movie.id}>
-                <Poster movie={movie} />
-              </Grid>
-            ))}
-        </Grid>
-      </Paper>
+      <div style={{ display: 'flex' }}>
+        <Drawer variant="permanent" anchor="left" className={classes.drawer}>
+          <div className={classes.appBarSpacer} />
+        </Drawer>
+        <Paper square className={classes.root}>
+          <div className={classes.appBarSpacer} />
+          <Grid container spacing={32}>
+            {movies &&
+              movies.results &&
+              movies.results.map(movie => (
+                <Grid item xs={2} key={movie.id}>
+                  <Poster movie={movie} />
+                </Grid>
+              ))}
+          </Grid>
+        </Paper>
+      </div>
     </>
   )
 }
