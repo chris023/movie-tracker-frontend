@@ -8,7 +8,7 @@ import {
   setFavorites,
   setMovies,
 } from '../actions'
-import tmdbApiKey from '../../apiKeys/TheMovieDB'
+import tmdb from '../../TheMovieDB/TheMovieDB'
 import db_path from '../../../config'
 
 import { takeLatest, put, call } from 'redux-saga/effects'
@@ -17,7 +17,7 @@ function* fetchMovies() {
   try {
     const movies = yield call(async () => {
       const response = await fetch(
-        'https://api.themoviedb.org/3/movie/popular?api_key=' + tmdbApiKey
+        'https://api.themoviedb.org/3/movie/popular?api_key=' + tmdb
       )
       return response.json()
     })
