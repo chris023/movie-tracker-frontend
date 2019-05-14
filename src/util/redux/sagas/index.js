@@ -103,13 +103,7 @@ function* removeFavorite(data) {
     yield call(async () => {
       await fetch(
         `${db_path}/users/${data.user_id}/favorites/${data.movie_id}`,
-        {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+        { method: 'DELETE' }
       )
     })
   } catch (e) {
