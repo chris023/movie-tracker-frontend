@@ -5,7 +5,7 @@ export default (state = { success: null, data: {} }, action) => {
     case 'LOGIN/SUCCESS':
       return { success: true, ...action.user }
     case 'AUTH/LOGOUT':
-      return { success: null }
+      return { success: null, data: {} }
     default:
       return state
   }
