@@ -8,7 +8,7 @@ import {
   setFavorites,
   setMovies,
 } from '../actions'
-import tmdbApiKey from '../../apiKeys/TheMovieDB'
+import tmdbApiKey from '../../TheMovieDB/TheMovieDB'
 import db_path from '../../../config'
 
 import { takeLatest, put, call } from 'redux-saga/effects'
