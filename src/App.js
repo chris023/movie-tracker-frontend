@@ -9,7 +9,7 @@ import MovieDetail from './paths/Movie'
 function App({ authenticated }) {
   return (
     <>
-      {/* {!authenticated && <Auth />} */}
+      {!authenticated && <Auth />}
       <Route path="/" component={Root} />
       <Route path="/movie/:movie_id" component={MovieDetail} />
     </>
