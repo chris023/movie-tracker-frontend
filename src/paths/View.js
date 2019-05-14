@@ -77,7 +77,7 @@ const View = ({ classes, fetchMovies, movies, logout }) => {
           {movies &&
             movies.results &&
             movies.results.map(movie => (
-              <Grid item xs={3} key={movie.id}>
+              <Grid item xs={2} key={movie.id}>
                 <Poster movie={movie} />
               </Grid>
             ))}
