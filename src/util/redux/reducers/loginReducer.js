@@ -1,7 +1,7 @@
 export default (state = { success: null, data: {} }, action) => {
   switch (action.type) {
     case 'LOGIN/FAILED':
-      return { success: false }
+      return { success: false, data: {} }
     case 'LOGIN/SUCCESS':
       return { success: true, ...action.user }
     case 'AUTH/LOGOUT':
