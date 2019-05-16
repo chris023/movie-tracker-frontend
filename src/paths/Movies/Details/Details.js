@@ -145,7 +145,7 @@ const Details = ({
 
   return (
     <>
-      <Link to="/">
+      <Link to="/movies">
         <IconButton className={classes.backIcon}>
           <ArrowBackIcon />
         </IconButton>
