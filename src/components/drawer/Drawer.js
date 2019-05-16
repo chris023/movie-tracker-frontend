@@ -6,7 +6,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
   Typography,
   withStyles,
 } from '@material-ui/core'
