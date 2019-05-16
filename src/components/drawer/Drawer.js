@@ -18,6 +18,9 @@ const styles = theme => ({
     marginTop: `${theme.spacing.unit * 4}px`,
     paddingLeft: theme.spacing.unit * 4,
   },
+  icon: {
+    paddingRight: theme.spacing.unit * 2,
+  },
   libraryList: {
     color: theme.palette.text.secondary,
     width: 240,
@@ -65,8 +68,8 @@ const View = ({ classes }) => {
             key={'link' + i}
           >
             <ListItem button disableGutters className={classes.listItem}>
-              <MovieIcon />
-              <ListItemText primary={item} />
+              <MovieIcon className={classes.icon} />
+              {item}
             </ListItem>
           </NavLink>
         ))}
