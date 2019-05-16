@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import MovieIcon from '@material-ui/icons/LocalMovies'
 import {
   Drawer,
@@ -24,6 +24,13 @@ const styles = theme => ({
   listItem: {
     paddingLeft: theme.spacing.unit * 6,
   },
+  navLink: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+  },
+  navLinkActive: {
+    color: theme.palette.secondary.main,
+  },
 })
 
 const View = ({ classes }) => {
@@ -46,12 +53,16 @@ const View = ({ classes }) => {
         Library
       </Typography>
       <List className={classes.libraryList}>
-        <Link to="/movies">
+        <NavLink
+          to="/movies"
+          className={classes.navLink}
+          activeClassName={classes.navLinkActive}
+        >
           <ListItem button disableGutters className={classes.listItem}>
             <MovieIcon />
             <ListItemText primary={'Movies'} />
           </ListItem>
-        </Link>
+        </NavLink>
       </List>
     </Drawer>
   )
