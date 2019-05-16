@@ -30,7 +30,7 @@ const Favorites = ({ classes, fetchMovies, movies, favorites, posterSize }) => {
           })}
         </Grid>
       ) : (
-        <Typography variant="h5">
+        <Typography variant="body1" color="textSecondary">
           {`Uh oh! There's nothing here. Favorite content in your library to see it here`}
         </Typography>
       )}

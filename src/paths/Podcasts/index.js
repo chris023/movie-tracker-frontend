@@ -11,7 +11,7 @@ const styles = theme => ({
 const View = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <Typography variant="h5">
+      <Typography variant="body1" color="textSecondary">
         {`Uh oh! There's nothing here. Add content to your library to see it here`}
       </Typography>
     </div>
