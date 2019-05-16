@@ -35,7 +35,13 @@ function* fetchFavorites(user_id) {
     //   const response = await fetch(`${db_path}/users/${user_id}/favorites`)
     //   return response.json()
     // })
-    yield put(setFavorites({ data: { results: [] } }))
+    yield put(
+      setFavorites({
+        status: 'success',
+        data: [],
+        message: 'Retrieved All favorites',
+      })
+    )
   } catch (e) {
     alert(e)
     // yield put(favoritesFetchFailed())
@@ -93,7 +99,7 @@ function* addFavorite(data) {
     //     },
     //   })
     // })
-    yield
+    yield put(addFavorite)
   } catch (e) {
     alert(e)
     return
@@ -119,7 +125,7 @@ export default function* mySaga() {
   yield takeLatest('MOVIES/FETCH', fetchMovies)
   yield takeLatest('LOGIN/ATTEMPT', action => attemptLogin(action.user))
   yield takeLatest('REGISTER/ATTEMPT', action => attemptRegister(action.user))
-  yield takeLatest('FAVORITE/ADD', action => addFavorite(action.data))
-  yield takeLatest('FAVORITE/REMOVE', action => removeFavorite(action.data))
+  // yield takeLatest('FAVORITE/ADD', action => addFavorite(action.data))
+  // yield takeLatest('FAVORITE/REMOVE', action => removeFavorite(action.data))
   yield takeLatest('FAVORITES/GET', action => fetchFavorites(action.user_id))
 }
