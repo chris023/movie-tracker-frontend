@@ -18,6 +18,7 @@ const styles = theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
+  appBarSpacer: theme.mixins.toolbar,
   pushRight: {
     marginLeft: 'auto',
   },
@@ -41,32 +42,35 @@ const View = ({ classes, logout }) => {
   }
 
   return (
-    <AppBar className={classes.appBar}>
-      <Toolbar>
-        <Link to="/">
-          <IconButton>
-            <HomeIcon />
-          </IconButton>
-        </Link>
-        <div className={classes.pushRight}>
-          <IconButton onClick={openMenu}>
-            <PersonIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchor}
-            open={open}
-            onClose={closeMenu}
-            PaperProps={{
-              style: {
-                width: 200,
-              },
-            }}
-          >
-            <MenuItem onClick={handleLogout}>Log Out</MenuItem>
-          </Menu>
-        </div>
-      </Toolbar>
-    </AppBar>
+    <>
+      <div className={classes.appBarSpacer} />
+      <AppBar className={classes.appBar}>
+        <Toolbar>
+          <Link to="/">
+            <IconButton>
+              <HomeIcon />
+            </IconButton>
+          </Link>
+          <div className={classes.pushRight}>
+            <IconButton onClick={openMenu}>
+              <PersonIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchor}
+              open={open}
+              onClose={closeMenu}
+              PaperProps={{
+                style: {
+                  width: 200,
+                },
+              }}
+            >
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+            </Menu>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </>
   )
 }
 

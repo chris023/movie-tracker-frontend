@@ -20,7 +20,6 @@ const styles = theme => ({
     background: theme.palette.background.paper,
     minHeight: '100vh',
   },
-  appBarSpacer: theme.mixins.toolbar,
   body: {
     display: 'grid',
     gridTemplateColumns: '241px 1fr',
@@ -59,7 +58,6 @@ const View = ({ classes, fetchMovies, movies }) => {
             },
           }}
         >
-          <div className={classes.appBarSpacer} />
           <Typography
             color="secondary"
             variant="h4"
