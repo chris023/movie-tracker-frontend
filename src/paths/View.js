@@ -1,35 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
-  AppBar,
   Drawer,
   Grid,
-  IconButton,
   List,
   ListItem,
   ListItemText,
-  Menu,
-  MenuItem,
   Paper,
-  Toolbar,
   Typography,
   withStyles,
 } from '@material-ui/core'
-import PersonIcon from '@material-ui/icons/Person'
-import HomeIcon from '@material-ui/icons/Home'
 import MovieIcon from '@material-ui/icons/LocalMovies'
 import { compose } from 'recompose'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Poster } from '../components/movie'
+import { Header, Poster } from '../components/'
 
 const styles = theme => ({
   root: {
     background: theme.palette.background.paper,
     minHeight: '100vh',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
   },
   appBarSpacer: theme.mixins.toolbar,
   body: {
@@ -50,60 +39,16 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 4,
   },
-  pushRight: {
-    marginLeft: 'auto',
-  },
 })
 
-const View = ({ classes, fetchMovies, movies, logout }) => {
-  const [anchor, setAnchor] = useState(null)
-  const [open, setOpen] = useState(false)
-  const openMenu = ({ target }) => {
-    setOpen(true)
-    setAnchor(target)
-  }
-  const closeMenu = () => {
-    setOpen(false)
-    setAnchor(null)
-  }
-
-  const handleLogout = () => {
-    closeMenu()
-    logout()
-  }
-
+const View = ({ classes, fetchMovies, movies }) => {
   useEffect(() => {
     fetchMovies()
   }, [fetchMovies])
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
-        <Toolbar>
-          <Link to="/">
-            <IconButton>
-              <HomeIcon />
-            </IconButton>
-          </Link>
-          <div className={classes.pushRight}>
-            <IconButton onClick={openMenu}>
-              <PersonIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchor}
-              open={open}
-              onClose={closeMenu}
-              PaperProps={{
-                style: {
-                  width: 200,
-                },
-              }}
-            >
-              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
+      <Header />
       <div className={classes.body}>
         <Drawer
           variant="permanent"
@@ -150,7 +95,6 @@ View.propTypes = {
   classes: PropTypes.object,
   fetchMovies: PropTypes.func,
   movies: PropTypes.object,
-  logout: PropTypes.func,
 }
 
 const mapStateToProps = ({ movies }) => ({
@@ -159,7 +103,6 @@ const mapStateToProps = ({ movies }) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchMovies: () => dispatch({ type: 'MOVIES/FETCH' }),
-  logout: () => dispatch({ type: 'AUTH/LOGOUT' }),
 })
 
 export default compose(

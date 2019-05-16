@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { MuiThemeProvider } from '@material-ui/core'
 
@@ -13,11 +13,11 @@ import './index.css'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <BrowserRouter history={history} basename="/movie-tracker-frontend">
       <MuiThemeProvider theme={theme}>
         <App />
       </MuiThemeProvider>
-    </Router>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )
