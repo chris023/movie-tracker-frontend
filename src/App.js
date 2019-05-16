@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Auth, Movies } from './paths'
+import { Auth, Favorites, Movies, Podcasts, TVShows } from './paths'
 import { UserInterface } from './components'
 
 const App = ({ authenticated }) => {
@@ -17,6 +17,9 @@ const App = ({ authenticated }) => {
     <UserInterface>
       <Switch>
         <Route path="/movies" component={Movies} />
+        <Route path="/favorites" component={Favorites} />
+        <Route path="/podcasts" component={Podcasts} />
+        <Route path="/tvshows" component={TVShows} />
         <Redirect to="/movies" />
       </Switch>
     </UserInterface>
