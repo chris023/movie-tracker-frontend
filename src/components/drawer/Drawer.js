@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import MovieIcon from '@material-ui/icons/LocalMovies'
 import {
   Drawer,
@@ -45,10 +46,12 @@ const View = ({ classes }) => {
         Library
       </Typography>
       <List className={classes.libraryList}>
-        <ListItem button disableGutters className={classes.listItem}>
-          <MovieIcon />
-          <ListItemText primary={'Movies'} />
-        </ListItem>
+        <Link to="/movies">
+          <ListItem button disableGutters className={classes.listItem}>
+            <MovieIcon />
+            <ListItemText primary={'Movies'} />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   )
