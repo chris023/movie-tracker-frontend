@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 })
 
-const Library = ({ classes, fetchMovies, movies }) => {
+const Library = ({ classes, fetchMovies, movies, posterSize }) => {
   useEffect(() => {
     fetchMovies()
   }, [fetchMovies])
@@ -22,7 +22,7 @@ const Library = ({ classes, fetchMovies, movies }) => {
         {movies &&
           movies.results &&
           movies.results.map(movie => (
-            <Grid item xs={2} key={movie.id}>
+            <Grid item xs={posterSize} key={movie.id}>
               <Poster movie={movie} />
             </Grid>
           ))}
@@ -35,10 +35,12 @@ Library.propTypes = {
   classes: PropTypes.object,
   fetchMovies: PropTypes.func,
   movies: PropTypes.object,
+  posterSize: PropTypes.number,
 }
 
-const mapStateToProps = ({ movies }) => ({
+const mapStateToProps = ({ movies, poster }) => ({
   movies,
+  posterSize: poster.size,
 })
 
 const mapDispatchToProps = dispatch => ({

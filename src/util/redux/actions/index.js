@@ -1,11 +1,11 @@
-export const fetchFailed = e => ({
-  type: 'MOVIES/FETCH_FAILED',
-  e,
+export const addFav = data => ({
+  type: 'FAVORITE/ADD',
+  data,
 })
 
-export const setMovies = movies => ({
-  type: 'MOVIES/SET',
-  movies,
+export const removeFav = data => ({
+  type: 'FAVORITE/REMOVE',
+  data,
 })
 
 export const getFavorites = user_id => ({
@@ -32,6 +32,16 @@ export const attemptLogin = user => ({
   user,
 })
 
+export const fetchFailed = e => ({
+  type: 'MOVIES/FETCH_FAILED',
+  e,
+})
+
+export const setMovies = movies => ({
+  type: 'MOVIES/SET',
+  movies,
+})
+
 export const attemptRegister = user => ({
   type: 'REGISTER/ATTEMPT',
   user,
@@ -46,12 +56,7 @@ export const registerFailed = () => ({
   type: 'REGISTER/FAILED',
 })
 
-export const addFav = data => ({
-  type: 'FAVORITE/ADD',
-  data,
-})
-
-export const removeFav = data => ({
-  type: 'FAVORITE/REMOVE',
-  data,
+export const setPosterSize = size => ({
+  type: 'POSTER/SETSIZE',
+  size,
 })

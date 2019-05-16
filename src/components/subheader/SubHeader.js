@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core'
 import Slider from '@material-ui/lab/Slider'
 import ViewComfyIcon from '@material-ui/icons/ViewComfy'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { compose } from 'recompose'
+import { setPosterSize } from '../../util/redux/actions/index'
 
 const styles = theme => ({
   appBar: {
@@ -38,9 +40,7 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes, location }) => {
-  const [slider, setSlider] = useState(2)
-
+const View = ({ classes, location, slider, setSlider }) => {
   const currentLibrary = () => {
     let library = location.pathname
       .split('/')
@@ -89,10 +89,24 @@ const View = ({ classes, location }) => {
 
 View.propTypes = {
   classes: PropTypes.object,
+  slider: PropTypes.number,
+  setSlider: PropTypes.func,
   location: PropTypes.object,
 }
 
+const mapStateToProps = state => ({
+  slider: state.poster.size,
+})
+
+const mapDispatchToProps = dispatch => ({
+  setSlider: size => dispatch(setPosterSize(size)),
+})
+
 export default compose(
   withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withRouter
 )(View)
