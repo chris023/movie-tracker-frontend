@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { AppBar, Toolbar, withStyles } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core'
 import Slider from '@material-ui/lab/Slider'
 import ViewComfyIcon from '@material-ui/icons/ViewComfy'
+import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
-import { connect } from 'react-redux'
 
 const styles = theme => ({
   appBar: {
@@ -38,14 +38,33 @@ const styles = theme => ({
   },
 })
 
-const View = ({ classes }) => {
+const View = ({ classes, location }) => {
   const [slider, setSlider] = useState(2)
+
+  const currentLibrary = () => {
+    let library = location.pathname
+      .split('/')
+      .find(value =>
+        ['movies', 'tvshows', 'podcasts', 'favorites'].includes(
+          value.toLowerCase()
+        )
+      )
+    try {
+      if (library === 'tvshows') library = 'tv shows'
+      return library[0].toUpperCase() + library.slice(1).toLowerCase()
+    } catch {
+      return ''
+    }
+  }
   return (
     <>
       <div className={classes.appBarSpacer} />
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <div className={classes.drawerSpacer} />
+          <Typography variant="h5" color="secondary">
+            My {currentLibrary()}
+          </Typography>
           <div className={classes.sliderContainer}>
             <div className={classes.slider}>
               <Slider
@@ -70,17 +89,10 @@ const View = ({ classes }) => {
 
 View.propTypes = {
   classes: PropTypes.object,
-  logout: PropTypes.func,
+  location: PropTypes.object,
 }
-
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch({ type: 'AUTH/LOGOUT' }),
-})
 
 export default compose(
   withStyles(styles),
-  connect(
-    null,
-    mapDispatchToProps
-  )
+  withRouter
 )(View)
