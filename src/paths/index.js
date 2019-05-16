@@ -1,3 +1,4 @@
-import View from './View'
+import Auth from './Auth'
+import Movies from './Movies'
 
-export default View
+export { Auth, Movies }

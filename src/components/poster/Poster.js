@@ -90,7 +90,7 @@ const Poster = ({
   }
 
   const goToMovie = e => {
-    if (e.target.id === 'overlay') history.push('/movie/' + movie.id)
+    if (e.target.id === 'overlay') history.push('/movies/' + movie.id)
   }
 
   return (

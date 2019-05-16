@@ -1,4 +1,6 @@
+import Drawer from './drawer/Drawer'
 import Header from './header/Header'
 import Poster from './poster/Poster'
+import UserInterface from './userinterface/UserInterface'
 
-export { Header, Poster }
+export { Drawer, Header, Poster, UserInterface }

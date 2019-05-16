@@ -1,18 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Route } from 'react-router-dom'
+import { Redirect, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Root from './paths'
-import Auth from './paths/Auth'
-import MovieDetail from './paths/Movie'
+import { Auth, Movies } from './paths'
+import { UserInterface } from './components'
 
-function App({ authenticated }) {
+const App = ({ authenticated }) => {
+  if (!authenticated)
+    return (
+      <UserInterface>
+        <Auth />
+        <Movies />
+      </UserInterface>
+    )
   return (
-    <>
-      {!authenticated && <Auth />}
-      <Route path="/" component={Root} />
-      <Route path="/movie/:movie_id" component={MovieDetail} />
-    </>
+    <UserInterface>
+      <Switch>
+        <Route path="/movies" component={Movies} />
+        <Redirect to="/movies" />
+      </Switch>
+    </UserInterface>
   )
 }
 

@@ -108,7 +108,7 @@ const styles = theme => ({
   },
 })
 
-const Poster = ({
+const Details = ({
   classes,
   history,
   movies,
@@ -225,7 +225,7 @@ const Poster = ({
   )
 }
 
-Poster.propTypes = {
+Details.propTypes = {
   classes: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object,
@@ -239,4 +239,4 @@ const mapStateToProps = state => ({
 export default compose(
   withStyles(styles),
   connect(mapStateToProps)
-)(Poster)
+)(Details)
