@@ -14,6 +14,7 @@ import {
 const styles = theme => ({
   appBarSpacer: theme.mixins.toolbar,
   drawerTitle: {
+    fontWeight: 700,
     marginTop: `${theme.spacing.unit * 4}px`,
     paddingLeft: theme.spacing.unit * 4,
   },
@@ -47,10 +48,10 @@ const View = ({ classes }) => {
       <div className={classes.appBarSpacer} />
       <Typography
         color="textSecondary"
-        variant="h4"
+        variant="caption"
         className={classes.drawerTitle}
       >
-        Library
+        LIBRARIES
       </Typography>
       <List className={classes.libraryList}>
         {['Favorites', 'Movies', 'TV Shows', 'Podcasts'].map((item, i) => (
