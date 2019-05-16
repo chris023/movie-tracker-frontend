@@ -50,7 +50,7 @@ const View = ({ classes, location, slider, setSlider }) => {
         )
       )
     try {
-      if (library === 'tvshows') library = 'tv shows'
+      if (library === 'tvshows') return 'TV Shows'
       return library[0].toUpperCase() + library.slice(1).toLowerCase()
     } catch {
       return ''
@@ -68,8 +68,8 @@ const View = ({ classes, location, slider, setSlider }) => {
           <div className={classes.sliderContainer}>
             <div className={classes.slider}>
               <Slider
-                min={3}
-                max={12}
+                min={1}
+                max={4}
                 step={1}
                 value={slider}
                 onChange={(_e, v) => setSlider(v)}
