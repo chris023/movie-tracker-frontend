@@ -46,23 +46,29 @@ const View = ({ classes }) => {
     >
       <div className={classes.appBarSpacer} />
       <Typography
-        color="secondary"
+        color="textSecondary"
         variant="h4"
         className={classes.drawerTitle}
       >
         Library
       </Typography>
       <List className={classes.libraryList}>
-        <NavLink
-          to="/movies"
-          className={classes.navLink}
-          activeClassName={classes.navLinkActive}
-        >
-          <ListItem button disableGutters className={classes.listItem}>
-            <MovieIcon />
-            <ListItemText primary={'Movies'} />
-          </ListItem>
-        </NavLink>
+        {['Favorites', 'Movies', 'TV Shows', 'Podcasts'].map((item, i) => (
+          <NavLink
+            to={`/${item
+              .toLowerCase()
+              .split(' ')
+              .join('')}`}
+            className={classes.navLink}
+            activeClassName={classes.navLinkActive}
+            key={'link' + i}
+          >
+            <ListItem button disableGutters className={classes.listItem}>
+              <MovieIcon />
+              <ListItemText primary={item} />
+            </ListItem>
+          </NavLink>
+        ))}
       </List>
     </Drawer>
   )
