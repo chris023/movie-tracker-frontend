@@ -12,7 +12,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import StarIcon from '@material-ui/icons/Star'
 import StarBorderIcon from '@material-ui/icons/StarBorder'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { compose } from 'recompose'
 
 const styles = theme => ({
@@ -136,7 +135,7 @@ const Details = ({
 
   const closeDialog = () => {
     setOpen(false)
-    history.push('/')
+    history.goBack()
   }
 
   useEffect(() => {
@@ -145,11 +144,9 @@ const Details = ({
 
   return (
     <>
-      <Link to="/movies">
-        <IconButton className={classes.backIcon}>
-          <ArrowBackIcon />
-        </IconButton>
-      </Link>
+      <IconButton className={classes.backIcon} onClick={closeDialog}>
+        <ArrowBackIcon />
+      </IconButton>
       <Dialog
         className={classes.root}
         open={open}
