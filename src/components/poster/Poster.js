@@ -20,7 +20,7 @@ const styles = theme => ({
   },
   iconButton: {
     color: '#999',
-    ['&:hover']: {
+    '&:hover': {
       color: '#fff !important',
     },
     zIndex: 10,
@@ -38,7 +38,7 @@ const styles = theme => ({
     transition: '.2s',
     top: 0,
     width: '100%',
-    ['&:hover']: {
+    '&:hover': {
       background: '#0006',
       border: `solid 2px ${theme.palette.secondary.main}`,
       filter: 'opacity(1)',
