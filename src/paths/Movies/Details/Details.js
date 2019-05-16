@@ -59,7 +59,7 @@ const styles = theme => ({
     width: 300,
   },
   dialogText: {
-    background: '#000a',
+    background: '#000c',
     borderRadius: 4,
     maxHeight: 450 - theme.spacing.unit * 28,
     overflow: 'scroll',
